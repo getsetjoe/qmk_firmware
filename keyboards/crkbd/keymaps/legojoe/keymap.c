@@ -21,10 +21,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdio.h>
 
 #define _QWERTY 0
-#define _LOWER 1
-#define _RAISE 2
-#define _ADJUST 3
-#define _COLEMAK 4
+#define _COLEMAK 1
+#define _LOWER 2
+#define _RAISE 3
+#define _ADJUST 4
 
 enum custom_keycodes {
     CTALTDL = SAFE_RANGE,
@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   MO(1),  KC_SPC,     KC_SPC,   MO(2), KC_LALT
+                                          KC_LGUI,   MO(2),  KC_SPC,     KC_SPC,   MO(3), KC_LALT
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, XXXXXXX,  CTRL_L, EXPDSEL,  CTRL_R, DELLINE,                        KC_P0,   KC_P1,   KC_P2,   KC_P3,  KC_DOT, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______,   MO(3), _______
+                                          _______, _______, _______,    _______,   MO(4), _______
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, XXXXXXX, UK_TILD, UK_HASH, KC_ASTR, UK_BSLS,                      KC_SLSH, KC_LBRC, KC_RBRC, _______, KC_QUES, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______,   MO(3), _______,    _______, _______, _______
+                                          _______,   MO(4), _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -83,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_F12,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX,   DF(0),                        DF(3), XXXXXXX, XXXXXXX, CTALTDL, KC_NLCK,RGB_RMOD,
+      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX,   DF(0),                        DF(1), XXXXXXX, XXXXXXX, CTALTDL, KC_NLCK,RGB_RMOD,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
@@ -97,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   MO(1),  KC_SPC,     KC_SPC,   MO(2), KC_LALT
+                                          KC_LGUI,   MO(2),  KC_SPC,     KC_SPC,   MO(3), KC_LALT
                                       //`--------------------------'  `--------------------------'
 
   )
@@ -208,52 +208,52 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch(keycode) {
         case CTALTDL:
             if (record->event.pressed) {
-                SEND_STRING(SS_LCTL(SS_LALT(X_DEL)));
+                tap_code16(C(A(KC_DELETE)));
             }
             break;
         case CTRL_L:
             if (record->event.pressed) {
-                SEND_STRING(SS_LCTL(X_LEFT));
+                tap_code16(C(KC_LEFT));
             }
             break;
         case CTRL_R:
             if (record->event.pressed) {
-                SEND_STRING(SS_LCTL(X_RIGHT));
+                tap_code16(C(KC_RIGHT));
             }
             break;
         case COPY_UP:
             if (record->event.pressed) {
-                SEND_STRING(SS_LSFT(SS_LALT(X_UP)));
+                tap_code16(S(A(KC_UP)));
             }
             break;
         case COPY_DN:
             if (record->event.pressed) {
-                SEND_STRING(SS_LSFT(SS_LALT(X_DOWN)));
+                tap_code16(S(A(KC_DOWN)));
             }
             break;
         case EXPDSEL:
             if (record->event.pressed) {
-                SEND_STRING(SS_LSFT(SS_LALT(X_RIGHT)));
+                tap_code16(S(A(KC_RIGHT)));
             }
             break;
         case DELLINE:
             if (record->event.pressed) {
-                SEND_STRING(SS_LCTL(SS_LSFT("k")));
+                tap_code16(C(S(KC_K)));
             }
             break;
         case MOVE_UP:
             if (record->event.pressed) {
-                SEND_STRING(SS_LALT(X_UP));
+                tap_code16(A(KC_UP));
             }
             break;
         case MOVE_DN:
             if (record->event.pressed) {
-                SEND_STRING(SS_LALT(X_DOWN));
+                tap_code16(A(KC_DOWN));
             }
             break;
         case MTCHBRK:
             if (record->event.pressed) {
-                SEND_STRING(SS_LCTL(SS_LSFT("\\")));
+                tap_code16(C(S(UK_BSLS)));
             }
             break;
     }
