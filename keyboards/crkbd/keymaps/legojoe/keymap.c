@@ -26,6 +26,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _ADJUST 3
 #define _COLEMAK 4
 
+enum custom_keycodes {
+    CTALTDL = SAFE_RANGE,
+    CTRL_L,
+    CTRL_R,
+    COPY_UP,
+    COPY_DN,
+    EXPDSEL, // expand selection
+    DELLINE,
+    MOVE_UP,
+    MOVE_DN,
+    MTCHBRK // match bracket
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
@@ -42,11 +55,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC, KC_PGUP, KC_HOME,   KC_UP,  KC_END, XXXXXXX,                      KC_PLUS,   KC_P7,   KC_P8,   KC_P9,  KC_PERC,_______,
+       KC_ESC, KC_PGUP, KC_HOME,   KC_UP,  KC_END, COPY_UP,                      KC_PLUS,   KC_P7,   KC_P8,   KC_P9,  KC_PERC,_______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_PGDN, KC_LEFT, KC_DOWN,KC_RIGHT, XXXXXXX,                      KC_MINS,   KC_P4,   KC_P5,   KC_P6, KC_COLN,  KC_DEL,
+      _______, KC_PGDN, KC_LEFT, KC_DOWN,KC_RIGHT, COPY_DN,                      KC_MINS,   KC_P4,   KC_P5,   KC_P6, KC_COLN,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        KC_P0,   KC_P1,   KC_P2,   KC_P3,  KC_DOT, _______,
+      _______, XXXXXXX,  CTRL_L, EXPDSEL,  CTRL_R, DELLINE,                        KC_P0,   KC_P1,   KC_P2,   KC_P3,  KC_DOT, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    _______,   MO(3), _______
                                       //`--------------------------'  `--------------------------'
@@ -54,9 +67,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, KC_EXLM, UK_DQUO, KC_HASH,  KC_DLR, KC_PERC,                      KC_PLUS, KC_LPRN, KC_RPRN, XXXXXXX, XXXXXXX, KC_BSPC,
+      _______, KC_EXLM, UK_DQUO, KC_HASH,  KC_DLR, KC_PERC,                      KC_PLUS, KC_LPRN, KC_RPRN, MOVE_UP, MTCHBRK, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, UK_CIRC, UK_PIPE, KC_AMPR,  KC_EQL, KC_UNDS,                      KC_MINS, KC_LCBR, KC_RCBR, XXXXXXX, KC_COLN,  KC_GRV,
+      _______, UK_CIRC, UK_PIPE, KC_AMPR,  KC_EQL, KC_UNDS,                      KC_MINS, KC_LCBR, KC_RCBR, MOVE_DN, KC_COLN,  KC_GRV,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, XXXXXXX, UK_TILD, UK_HASH, KC_ASTR, UK_BSLS,                      KC_SLSH, KC_LBRC, KC_RBRC, _______, KC_QUES, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -70,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_F12,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX,   DF(0),                        DF(3), XXXXXXX, XXXXXXX, XXXXXXX, KC_NLCK,RGB_RMOD,
+      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX,   DF(0),                        DF(3), XXXXXXX, XXXXXXX, CTALTDL, KC_NLCK,RGB_RMOD,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
@@ -89,6 +102,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   )
 };
+
+
+
+
+
 
 #ifdef OLED_DRIVER_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -187,9 +205,63 @@ void oled_task_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-    set_keylog(keycode, record);
-  }
-  return true;
+    switch(keycode) {
+        case CTALTDL:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LCTL(SS_LALT(X_DEL)));
+            }
+            break;
+        case CTRL_L:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LCTL(X_LEFT));
+            }
+            break;
+        case CTRL_R:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LCTL(X_RIGHT));
+            }
+            break;
+        case COPY_UP:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LSFT(SS_LALT(X_UP)));
+            }
+            break;
+        case COPY_DN:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LSFT(SS_LALT(X_DOWN)));
+            }
+            break;
+        case EXPDSEL:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LSFT(SS_LALT(X_RIGHT)));
+            }
+            break;
+        case DELLINE:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LCTL(SS_LSFT("k")));
+            }
+            break;
+        case MOVE_UP:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LALT(X_UP));
+            }
+            break;
+        case MOVE_DN:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LALT(X_DOWN));
+            }
+            break;
+        case MTCHBRK:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LCTL(SS_LSFT("\\")));
+            }
+            break;
+    }
+
+    if (record->event.pressed) {
+        set_keylog(keycode, record);
+    }
+
+    return true;
 }
 #endif // OLED_DRIVER_ENABLE
