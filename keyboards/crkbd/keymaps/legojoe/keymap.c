@@ -117,23 +117,24 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 void oled_render_layer_state(void) {
     oled_write_P(PSTR("Layer: "), false);
-    switch (get_highest_layer(layer_state)) {
-        case _QWERTY:
-            oled_write_ln_P(PSTR("Default"), false);
-            break;
+    switch (get_highest_layer(layer_state|default_layer_state)) {
         case _COLEMAK:
-            oled_write_ln_P(PSTR("Colemak"), false);
+            oled_write_ln_P(PSTR("[ COLEMAK ]"), false);
+            break;
+        case _QWERTY:
+            oled_write_ln_P(PSTR("[ QWERTY ]"), false);
             break;
         case _LOWER:
-            oled_write_ln_P(PSTR("Lower"), false);
+            oled_write_ln_P(PSTR("[ LOWER ]"), false);
             break;
         case _RAISE:
-            oled_write_ln_P(PSTR("Raise"), false);
+            oled_write_ln_P(PSTR("[ RAISE ]"), false);
             break;
         case _ADJUST:
-            oled_write_ln_P(PSTR("Adjust"), false);
+            oled_write_ln_P(PSTR("[ ADJUST ]"), false);
             break;
     }
+    oled_write_ln_P(PSTR("  "), false);
 }
 
 
