@@ -197,6 +197,7 @@ void oled_task_user(void) {
         oled_render_logo();
     }
 }
+#endif // OLED_DRIVER_ENABLE
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch(keycode) {
@@ -262,10 +263,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
     }
 
+#ifdef OLED_DRIVER_ENABLE
     if (record->event.pressed) {
         set_keylog(keycode, record);
     }
+#endif // OLED_DRIVER_ENABLE
 
     return true;
 }
-#endif // OLED_DRIVER_ENABLE
