@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 #include "keymap_uk.h"
-#include <stdio.h>
 
 #define _QWERTY 0
 #define _COLEMAK 1
@@ -110,74 +109,79 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
     return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
+  } else {
+    return OLED_ROTATION_270;
   }
   return rotation;
 }
 
 
+// void oled_render_layer_state(void) {
+//     oled_write_P(PSTR("Layer: "), false);
+//     switch (get_highest_layer(layer_state|default_layer_state)) {
+//         case _COLEMAK:
+//             oled_write_ln_P(PSTR("[ COLEMAK ]"), false);
+//             break;
+//         case _QWERTY:
+//             oled_write_ln_P(PSTR("[ QWERTY ]"), false);
+//             break;
+//         case _LOWER:
+//             oled_write_ln_P(PSTR("[ LOWER ]"), false);
+//             break;
+//         case _RAISE:
+//             oled_write_ln_P(PSTR("[ RAISE ]"), false);
+//             break;
+//         case _ADJUST:
+//             oled_write_ln_P(PSTR("[ ADJUST ]"), false);
+//             break;
+//     }
+//     oled_write_ln_P(PSTR("  "), false);
+// }
+
 void oled_render_layer_state(void) {
-    oled_write_P(PSTR("Layer: "), false);
+    static const char PROGMEM qwerty_layer[] = {
+        0x20, 0x95, 0x96, 0x97, 0x20,
+        0x20, 0xb5, 0xb6, 0xb7, 0x20,
+        0x20, 0xd5, 0xd6, 0xd7, 0x20,
+        0x20, 0x20, 0x20, 0x20, 0x20, // space
+        0x20, 0x5c, 0x5d, 0x5e, 0x5f, // keeb
+        0x20, 0x7c, 0x7d, 0x7e, 0x7f, 0};
+    static const char PROGMEM colemak_layer[] = {
+        0x20, 0x98, 0x99, 0x9a, 0x20,
+        0x20, 0xb8, 0xb9, 0xba, 0x20,
+        0x20, 0xd8, 0xd9, 0xda, 0x20,
+        0x20, 0x20, 0x20, 0x20, 0x20, // space
+        0x20, 0x5c, 0x5d, 0x5e, 0x5f, // keeb
+        0x20, 0x7c, 0x7d, 0x7e, 0x7f, 0};
+    static const char PROGMEM raise_layer[] = {
+        0x20, 0x9c, 0x9d, 0x9e, 0x20,
+        0x20, 0xbc, 0xbd, 0xbe, 0x20,
+        0x20, 0x20, 0x20, 0x20, 0x20, 0};
+    static const char PROGMEM lower_layer[] = {
+        0x20, 0x20, 0x20, 0x20, 0x20,
+        0x20, 0xbc, 0xbd, 0xbe, 0x20,
+        0x20, 0xdc, 0xdd, 0xde, 0x20, 0};
+    static const char PROGMEM adjust_layer[] = {
+        0x20, 0x9c, 0x9d, 0x9e, 0x20,
+        0x20, 0xbc, 0xbd, 0xbe, 0x20,
+        0x20, 0xdc, 0xdd, 0xde, 0x20, 0};
+
     switch (get_highest_layer(layer_state|default_layer_state)) {
         case _COLEMAK:
-            oled_write_ln_P(PSTR("[ COLEMAK ]"), false);
+            oled_write_P(colemak_layer, false);
             break;
         case _QWERTY:
-            oled_write_ln_P(PSTR("[ QWERTY ]"), false);
+            oled_write_P(qwerty_layer, false);
             break;
         case _LOWER:
-            oled_write_ln_P(PSTR("[ LOWER ]"), false);
+            oled_write_P(lower_layer, false);
             break;
         case _RAISE:
-            oled_write_ln_P(PSTR("[ RAISE ]"), false);
+            oled_write_P(raise_layer, false);
             break;
         case _ADJUST:
-            oled_write_ln_P(PSTR("[ ADJUST ]"), false);
+            oled_write_P(adjust_layer, false);
             break;
-    }
-    oled_write_ln_P(PSTR("  "), false);
-}
-
-
-char keylog_str[24] = {};
-
-const char code_to_name[60] = {
-    ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
-    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-    'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-    'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\',
-    '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
-
-void set_keylog(uint16_t keycode, keyrecord_t *record) {
-  char name = ' ';
-    if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) ||
-        (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) { keycode = keycode & 0xFF; }
-  if (keycode < 60) {
-    name = code_to_name[keycode];
-  }
-
-  // update keylog
-  snprintf(keylog_str, sizeof(keylog_str), "%dx%d, k%2d : %c",
-           record->event.key.row, record->event.key.col,
-           keycode, name);
-}
-
-void oled_render_keylog(void) {
-    oled_write(keylog_str, false);
-}
-
-void render_bootmagic_status(bool status) {
-    /* Show Ctrl-Gui Swap options */
-    static const char PROGMEM logo[][2][3] = {
-        {{0x97, 0x98, 0}, {0xb7, 0xb8, 0}},
-        {{0x95, 0x96, 0}, {0xb5, 0xb6, 0}},
-    };
-    if (status) {
-        oled_write_ln_P(logo[0][0], false);
-        oled_write_ln_P(logo[0][1], false);
-    } else {
-        oled_write_ln_P(logo[1][0], false);
-        oled_write_ln_P(logo[1][1], false);
     }
 }
 
@@ -190,14 +194,15 @@ void oled_render_logo(void) {
     oled_write_P(crkbd_logo, false);
 }
 
+
 void oled_task_user(void) {
     if (is_keyboard_master()) {
         oled_render_layer_state();
-        oled_render_keylog();
     } else {
         oled_render_logo();
     }
 }
+
 #endif // OLED_DRIVER_ENABLE
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -266,7 +271,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #ifdef OLED_DRIVER_ENABLE
     if (record->event.pressed) {
-        set_keylog(keycode, record);
+        // set_keylog(keycode, record);
     }
 #endif // OLED_DRIVER_ENABLE
 
