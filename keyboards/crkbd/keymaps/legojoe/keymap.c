@@ -25,20 +25,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _RAISE 3
 #define _ADJUST 4
 
-enum custom_keycodes {
-    CTALTDL = SAFE_RANGE,
-    CTRL_L,
-    CTRL_R,
-    COPY_UP,
-    COPY_DN,
-    EXPDSEL, // expand selection
-    DELLINE,
-    MOVE_UP,
-    MOVE_DN,
-    MTCHBRK, // match bracket
-    VDESK_L,
-    VDESK_R
-};
+#define CTALTDL LCA(KC_DEL)
+// VS Code shortcuts
+#define CTRL_L  C(KC_LEFT)
+#define CTRL_R  C(KC_RIGHT)
+#define COPY_UP LSA(KC_UP)
+#define COPY_DN LSA(KC_DOWN)
+#define EXPDSEL LSA(KC_RIGHT) // expand selection
+#define DELLINE C(S(KC_K))
+#define MOVE_UP A(KC_UP)
+#define MOVE_DN A(KC_DOWN)
+#define MTCHBRK C(S(UK_BSLS))
+#define VDESK_L G(C(KC_LEFT))
+#define VDESK_R G(C(KC_RIGHT))
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_split_3x6_3(
@@ -187,75 +187,6 @@ void oled_task_user(void) {
 
 #endif // OLED_DRIVER_ENABLE
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch(keycode) {
-        case CTALTDL:
-            if (record->event.pressed) {
-                tap_code16(C(A(KC_DELETE)));
-            }
-            break;
-        case CTRL_L:
-            if (record->event.pressed) {
-                tap_code16(C(KC_LEFT));
-            }
-            break;
-        case CTRL_R:
-            if (record->event.pressed) {
-                tap_code16(C(KC_RIGHT));
-            }
-            break;
-        case COPY_UP:
-            if (record->event.pressed) {
-                tap_code16(S(A(KC_UP)));
-            }
-            break;
-        case COPY_DN:
-            if (record->event.pressed) {
-                tap_code16(S(A(KC_DOWN)));
-            }
-            break;
-        case EXPDSEL:
-            if (record->event.pressed) {
-                tap_code16(S(A(KC_RIGHT)));
-            }
-            break;
-        case DELLINE:
-            if (record->event.pressed) {
-                tap_code16(C(S(KC_K)));
-            }
-            break;
-        case MOVE_UP:
-            if (record->event.pressed) {
-                tap_code16(A(KC_UP));
-            }
-            break;
-        case MOVE_DN:
-            if (record->event.pressed) {
-                tap_code16(A(KC_DOWN));
-            }
-            break;
-        case MTCHBRK:
-            if (record->event.pressed) {
-                tap_code16(C(S(UK_BSLS)));
-            }
-            break;
-        case VDESK_L:
-            if (record->event.pressed) {
-                tap_code16(G(C(KC_LEFT)));
-            }
-            break;
-        case VDESK_R:
-            if (record->event.pressed) {
-                tap_code16(G(C(KC_RIGHT)));
-            }
-            break;
-    }
-
-#ifdef OLED_DRIVER_ENABLE
-    if (record->event.pressed) {
-        // set_keylog(keycode, record);
-    }
-#endif // OLED_DRIVER_ENABLE
-
-    return true;
-}
+// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+//     return true;
+// }
