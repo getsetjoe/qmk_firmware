@@ -106,6 +106,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 #ifdef OLED_DRIVER_ENABLE
+static uint32_t oled_timer = 0;
+
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
     return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
@@ -191,6 +193,13 @@ void oled_render_logo(void) {
 
 
 void oled_task_user(void) {
+    if (timer_elapsed32(oled_timer) > 30000) {
+        oled_off();
+        return;
+    } else {
+        oled_on();
+    }
+
     if (is_keyboard_master()) {
         oled_render_layer_state();
     } else {
@@ -200,6 +209,12 @@ void oled_task_user(void) {
 
 #endif // OLED_DRIVER_ENABLE
 
-// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-//     return true;
-// }
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+#ifdef OLED_DRIVER_ENABLE
+        oled_timer = timer_read32();
+#endif
+  }
+
+    return true;
+}
