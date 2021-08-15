@@ -50,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   MO(2),  KC_SPC,     KC_SPC,   MO(3), KC_LALT
+                                          KC_LALT,   MO(2),  KC_SPC,     KC_SPC,   MO(3), KC_LGUI
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -99,9 +99,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   MO(2),  KC_SPC,     KC_SPC,   MO(3), KC_LALT
+                                          KC_LALT,   MO(2),  KC_SPC,     KC_SPC,   MO(3), KC_LGUI
                                       //`--------------------------'  `--------------------------'
-
   )
 };
 
@@ -149,7 +148,7 @@ void oled_render_layer_state(void) {
         0x01, 0x01, 0x01, 0xb3, 0xb4, 0xb5, 0xb6, 0x01, 0x01, 0xb8, 0xb9, 0x01, 0x01, 0xbb, 0xbc, 0xbd, 0xbe, 0x01, 0x01, 0x01, 0x01,
         0};
     static const char PROGMEM numlock_on[] = {
-        0xd4, 0xd5, 0xd6, 
+        0xd4, 0xd5, 0xd6,
         0};
     static const char PROGMEM numlock_off[] = {
         0x01, 0x01, 0x01,
