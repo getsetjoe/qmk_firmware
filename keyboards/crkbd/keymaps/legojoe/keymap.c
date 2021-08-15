@@ -19,13 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include "keymap_uk.h"
 
-#define _COLEMAK 0
+#define _COLEMAK 0 // Colemak DH
 #define _QWERTY 1
 #define _LOWER 2
 #define _RAISE 3
 #define _ADJUST 4
 
 #define CTALTDL LCA(KC_DEL)
+#define OS_LSFT OSM(MOD_LSFT)
 // VS Code shortcuts
 #define CTRL_L  C(KC_LEFT)
 #define CTRL_R  C(KC_RIGHT)
@@ -45,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, UK_QUOT,
+      OS_LSFT,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, UK_QUOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -94,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O, UK_QUOT,
+      OS_LSFT,    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O, UK_QUOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -147,6 +148,12 @@ void oled_render_layer_state(void) {
         0x01, 0x01, 0x01, 0x93, 0x94, 0x95, 0x96, 0x01, 0x01, 0x98, 0x99, 0x01, 0x01, 0x9b, 0x9c, 0x9d, 0x9e, 0x01, 0x01, 0x01, 0x01,
         0x01, 0x01, 0x01, 0xb3, 0xb4, 0xb5, 0xb6, 0x01, 0x01, 0xb8, 0xb9, 0x01, 0x01, 0xbb, 0xbc, 0xbd, 0xbe, 0x01, 0x01, 0x01, 0x01,
         0};
+    static const char PROGMEM numlock_on[] = {
+        0xd4, 0xd5, 0xd6, 
+        0};
+    static const char PROGMEM numlock_off[] = {
+        0x01, 0x01, 0x01,
+        0};
 
     switch (get_highest_layer(layer_state|default_layer_state)) {
         case _COLEMAK:
@@ -164,6 +171,13 @@ void oled_render_layer_state(void) {
         case _ADJUST:
             oled_write_P(adjust_layer, false);
             break;
+    }
+
+    led_t led_state = host_keyboard_led_state();
+    if (led_state.num_lock) {
+        oled_write_P(numlock_on, false);
+    } else {
+        oled_write_P(numlock_off, false);
     }
 }
 
