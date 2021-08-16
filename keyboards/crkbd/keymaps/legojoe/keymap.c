@@ -37,6 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOVE_UP A(KC_UP)
 #define MOVE_DN A(KC_DOWN)
 #define MTCHBRK C(S(UK_BSLS))
+// Windows shortcuts
 #define VDESK_L G(C(KC_LEFT))
 #define VDESK_R G(C(KC_RIGHT))
 
@@ -193,11 +194,9 @@ void oled_render_logo(void) {
 
 
 void oled_task_user(void) {
-    if (timer_elapsed32(oled_timer) > 30000) {
+    if (timer_elapsed32(oled_timer) > 60000) {
         oled_off();
         return;
-    } else {
-        oled_on();
     }
 
     if (is_keyboard_master()) {
