@@ -148,12 +148,6 @@ void oled_render_layer_state(void) {
         0x01, 0x01, 0x01, 0x93, 0x94, 0x95, 0x96, 0x01, 0x01, 0x98, 0x99, 0x01, 0x01, 0x9b, 0x9c, 0x9d, 0x9e, 0x01, 0x01, 0x01, 0x01,
         0x01, 0x01, 0x01, 0xb3, 0xb4, 0xb5, 0xb6, 0x01, 0x01, 0xb8, 0xb9, 0x01, 0x01, 0xbb, 0xbc, 0xbd, 0xbe, 0x01, 0x01, 0x01, 0x01,
         0};
-    static const char PROGMEM numlock_on[] = {
-        0xd4, 0xd5, 0xd6,
-        0};
-    static const char PROGMEM numlock_off[] = {
-        0x01, 0x01, 0x01,
-        0};
 
     switch (get_highest_layer(layer_state|default_layer_state)) {
         case _COLEMAK:
@@ -172,8 +166,18 @@ void oled_render_layer_state(void) {
             oled_write_P(adjust_layer, false);
             break;
     }
+}
+
+void oled_render_led_state(void) {
+    static const char PROGMEM numlock_on[] = {
+        0xd4, 0xd5, 0xd6,
+        0};
+    static const char PROGMEM numlock_off[] = {
+        0x01, 0x01, 0x01,
+        0};
 
     led_t led_state = host_keyboard_led_state();
+
     if (led_state.num_lock) {
         oled_write_P(numlock_on, false);
     } else {
@@ -194,6 +198,7 @@ void oled_render_logo(void) {
 void oled_task_user(void) {
     if (is_keyboard_master()) {
         oled_render_layer_state();
+        oled_render_led_state();
     } else {
         oled_render_logo();
     }
@@ -201,10 +206,10 @@ void oled_task_user(void) {
 
 #endif // OLED_DRIVER_ENABLE
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
+// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+//     if (record->event.pressed) {
+        
+//     }
 
-    }
-
-    return true;
-}
+//     return true;
+// }
