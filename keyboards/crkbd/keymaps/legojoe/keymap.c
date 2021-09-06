@@ -110,9 +110,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef OLED_ENABLE
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-  if (!is_keyboard_master()) {
-    return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
-  }
+  // if (!is_keyboard_master()) {
+  //   return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
+  // }
   return OLED_ROTATION_270;
 }
 
@@ -224,7 +224,12 @@ void oled_task_user(void) {
     oled_render_led_state();
     oled_render_layout_state();
   } else {
-    oled_render_logo();
+    oled_render_space();
+    oled_render_mini_logo();
+    oled_render_space();
+    oled_render_mini_logo();
+    oled_render_space();
+    oled_render_mini_logo();
   }
 }
 
