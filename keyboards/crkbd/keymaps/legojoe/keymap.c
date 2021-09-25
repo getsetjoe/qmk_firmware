@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC, KC_PGUP, KC_HOME,   KC_UP,  KC_END, COPY_UP,                      KC_PLUS,   KC_P7,   KC_P8,   KC_P9,  KC_PERC, KC_DEL,
+       KC_ESC, KC_PGUP, KC_HOME,   KC_UP,  KC_END, COPY_UP,                      KC_PLUS,   KC_P7,   KC_P8,   KC_P9, KC_PERC,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_PGDN, KC_LEFT, KC_DOWN,KC_RIGHT, COPY_DN,                      KC_MINS,   KC_P4,   KC_P5,   KC_P6, KC_COLN, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -172,40 +172,40 @@ void oled_render_layer_state(void) {
 }
 
 void oled_render_led_state(void) {
-  static const char PROGMEM numlock_on[] = {
-    0x85, 0x86, 0x87, 0x88, 0x89,
-    0xa5, 0xa6, 0xa7, 0xa8, 0xa9,
-    0};
-  static const char PROGMEM numlock_off[] = {
-    0x20, 0x20, 0x20, 0x20, 0x20,
-    0x20, 0x20, 0x20, 0x20, 0x20,
-    0};
+  // static const char PROGMEM numlock_on[] = {
+  //   0x85, 0x86, 0x87, 0x88, 0x89,
+  //   0xa5, 0xa6, 0xa7, 0xa8, 0xa9,
+  //   0};
+  // static const char PROGMEM numlock_off[] = {
+  //   0x20, 0x20, 0x20, 0x20, 0x20,
+  //   0x20, 0x20, 0x20, 0x20, 0x20,
+  //   0};
 
   led_t led_state = host_keyboard_led_state();
 
   if (led_state.num_lock) {
-    oled_write_P(numlock_on, false);
+    oled_write_P(PSTR(" num "), false);
   } else {
-    oled_write_P(numlock_off, false);
+    oled_write_P(PSTR("     "), false);
   }
 }
 
 void oled_render_layout_state(void) {
-  static const char PROGMEM colemak[] = {
-    0x8a, 0x8b, 0x8c, 0x8d, 0x8e,
-    0xaa, 0xab, 0xac, 0xad, 0xae,
-    0};
-  static const char PROGMEM qwerty[] = {
-    0x20, 0x20, 0x20, 0x20, 0x20,
-    0x20, 0x20, 0x20, 0x20, 0x20,
-    0};
+  // static const char PROGMEM colemak[] = {
+  //   0x8a, 0x8b, 0x8c, 0x8d, 0x8e,
+  //   0xaa, 0xab, 0xac, 0xad, 0xae,
+  //   0};
+  // static const char PROGMEM qwerty[] = {
+  //   0x20, 0x20, 0x20, 0x20, 0x20,
+  //   0x20, 0x20, 0x20, 0x20, 0x20,
+  //   0};
 
   switch (get_highest_layer(layer_state|default_layer_state)) {
     case _COLEMAK:
-      oled_write_P(colemak, false);
+      oled_write_P(PSTR(" k:c "), false);
       break;
     case _QWERTY:
-      oled_write_P(qwerty, false);
+      oled_write_P(PSTR(" k:q "), false);
       break;
   }
 }
@@ -223,6 +223,7 @@ void oled_task_user(void) {
     oled_render_layer_state();
     oled_render_space();
     oled_render_led_state();
+    oled_render_space();
     oled_render_layout_state();
   } else {
     oled_render_logo();
