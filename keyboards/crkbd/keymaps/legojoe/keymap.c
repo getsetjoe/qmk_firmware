@@ -62,9 +62,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC, KC_PGUP, KC_HOME,   KC_UP,  KC_END, COPY_UP,                      KC_PLUS,   KC_P7,   KC_P8,   KC_P9, KC_PERC,  KC_DEL,
+       KC_ESC, KC_PGUP, KC_HOME,   KC_UP,  KC_END, MOVE_UP,                      KC_PLUS,   KC_P7,   KC_P8,   KC_P9, KC_PERC, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_PGDN, KC_LEFT, KC_DOWN,KC_RIGHT, COPY_DN,                      KC_MINS,   KC_P4,   KC_P5,   KC_P6, KC_COLN, _______,
+      _______, KC_PGDN, KC_LEFT, KC_DOWN,KC_RIGHT, MOVE_DN,                      KC_MINS,   KC_P4,   KC_P5,   KC_P6, KC_COLN,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______,    UNDO,  CTRL_L, EXPDSEL,  CTRL_R, DELLINE,                        KC_P0,   KC_P1,   KC_P2,   KC_P3,  KC_DOT, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -74,9 +74,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, KC_EXLM, UK_DQUO, KC_HASH,  KC_DLR, KC_PERC,                      KC_PLUS, KC_LPRN, KC_RPRN, MOVE_UP, MTCHBRK,  KC_DEL,
+      _______, KC_EXLM, UK_DQUO, KC_HASH,  KC_DLR, KC_PERC,                      KC_PLUS, KC_LPRN, KC_RPRN, COPY_UP, MTCHBRK, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, UK_CIRC, UK_PIPE, KC_AMPR,  KC_EQL, KC_UNDS,                      KC_MINS, KC_LCBR, KC_RCBR, MOVE_DN, KC_COLN,  KC_GRV,
+      _______, UK_CIRC, UK_PIPE, KC_AMPR,  KC_EQL, KC_UNDS,                      KC_MINS, KC_LCBR, KC_RCBR, COPY_DN, KC_COLN,  KC_GRV,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______,    REDO, UK_TILD, UK_HASH, KC_ASTR, UK_BSLS,                      KC_SLSH, KC_LBRC, KC_RBRC, GRT_THN, KC_QUES, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
