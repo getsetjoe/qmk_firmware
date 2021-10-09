@@ -22,15 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define CTALTDL LCA(KC_DEL)
 #define OS_LSFT OSM(MOD_LSFT)
 // VS Code shortcuts
-#define CTRL_L  C(KC_LEFT)
-#define CTRL_R  C(KC_RIGHT)
-#define COPY_UP LSA(KC_UP)
-#define COPY_DN LSA(KC_DOWN)
-#define EXPDSEL LSA(KC_RIGHT) // expand selection
-#define SHRKSEL LSA(KC_LEFT) // shrink selection
+#define CTRL_D  C(KC_D)
 #define DELLINE C(S(KC_K))
-#define MOVE_UP A(KC_UP)
-#define MOVE_DN A(KC_DOWN)
 #define MTCHBRK C(S(UK_BSLS))
 #define UNDO    C(KC_Z)
 #define REDO    C(KC_Y)
@@ -44,7 +37,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define VDESK_L G(C(KC_LEFT))
 #define VDESK_R G(C(KC_RIGHT))
 // Layer-tap
-#define SPC_NAV LT(5, KC_SPC)
+#define SPC_NAV LT(1, KC_SPC)
+// Right-hand home row mods - lower layer
+#define P4_ALT LALT_T(KC_P4)
+#define P5_SFT RSFT_T(KC_P5)
+#define P6_CTL LCTL_T(KC_P6)
 
 enum layers {
   _COLEMAK, // Colemak DH
@@ -71,9 +68,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC, KC_PGUP, KC_HOME,   KC_UP,  KC_END, MOVE_UP,                      KC_PLUS,   KC_P7,   KC_P8,   KC_P9, KC_PERC, _______,
+       KC_ESC, KC_PGUP, KC_HOME,   KC_UP,  KC_END, MTCHBRK,                      KC_PLUS,   KC_P7,   KC_P8,   KC_P9, KC_PERC, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_PGDN, KC_LEFT, KC_DOWN,KC_RIGHT, MOVE_DN,                      KC_MINS,   KC_P4,   KC_P5,   KC_P6, KC_COLN,  KC_DEL,
+      _______, KC_PGDN, KC_LEFT, KC_DOWN,KC_RIGHT,  CTRL_D,                      KC_MINS,  P4_ALT,  P5_SFT,  P6_CTL, KC_COLN,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______,    UNDO,     CUT,    COPY,   PASTE, DELLINE,                        KC_P0,   KC_P1,   KC_P2,   KC_P3,  KC_DOT, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -83,9 +80,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, KC_EXLM, UK_DQUO, KC_HASH,  KC_DLR, KC_PERC,                      KC_PLUS, KC_LPRN, KC_RPRN, COPY_UP, MTCHBRK, _______,
+      _______, KC_EXLM, UK_DQUO, KC_HASH,  KC_DLR, KC_PERC,                      KC_PLUS, KC_LPRN, KC_RPRN, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, UK_CIRC, UK_PIPE, KC_AMPR,  KC_EQL, KC_UNDS,                      KC_MINS, KC_LCBR, KC_RCBR, COPY_DN, KC_COLN,  KC_GRV,
+      _______, UK_CIRC, UK_PIPE, KC_AMPR,  KC_EQL, KC_UNDS,                      KC_MINS, KC_LCBR, KC_RCBR, _______, KC_COLN,  KC_GRV,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______,    REDO, UK_TILD, UK_HASH, KC_ASTR, UK_BSLS,                      KC_SLSH, KC_LBRC, KC_RBRC, GRT_THN, KC_QUES, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -114,18 +111,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LALT,   MO(2),  KC_SPC,    SPC_NAV,   MO(3), KC_LGUI
-                                      //`--------------------------'  `--------------------------'
-  ),
-
-  [_NAV] = LAYOUT_split_3x6_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC, MTCHBRK, KC_HOME, EXPDSEL,  KC_END, COPY_UP,                      _______, UK_HASH, KC_ASTR, _______, KC_PERC, _______,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,    SAVE,  CTRL_L, SHRKSEL,  CTRL_R, COPY_DN,                      KC_EXLM,  KC_EQL, KC_AMPR, UK_PIPE, KC_SCLN,  KC_DEL,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,    UNDO,     CUT,    COPY,   PASTE, COMMENT,                      _______, KC_MINS, KC_UNDS, _______, _______, _______,
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   )
 };
