@@ -37,7 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define VDESK_L G(C(KC_LEFT))
 #define VDESK_R G(C(KC_RIGHT))
 // Layer-tap
-#define SPC_NAV LT(1, KC_SPC)
+#define SPC_NAV LT(2, KC_SPC)
 // Right-hand home row mods - lower layer
 #define P4_ALT LALT_T(KC_P4)
 #define P5_SFT RSFT_T(KC_P5)
