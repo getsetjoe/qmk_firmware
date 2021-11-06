@@ -25,7 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // VS Code shortcuts
 #define CTRL_D  C(KC_D)
 #define DELLINE C(S(KC_K))
-#define MTCHBRK C(S(UK_BSLS))
 #define UNDO    C(KC_Z)
 #define REDO    C(KC_Y)
 #define GRT_THN S(KC_DOT)
@@ -34,6 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PASTE   C(KC_V)
 #define COMMENT C(KC_SLSH)
 #define SAVE    C(KC_S) 
+// #define MTCHBRK C(S(UK_BSLS))
 // Windows shortcuts
 #define VDESK_L G(C(KC_LEFT))
 #define VDESK_R G(C(KC_RIGHT))
@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC, KC_PGUP, KC_HOME,   KC_UP,  KC_END, MTCHBRK,                      KC_PLUS,   KC_P7,   KC_P8,   KC_P9, KC_PERC, _______,
+       KC_ESC, KC_PGUP, KC_HOME,   KC_UP,  KC_END,    SAVE,                      KC_PLUS,   KC_P7,   KC_P8,   KC_P9, KC_PERC, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_PGDN, KC_LEFT, KC_DOWN,KC_RIGHT,  CTRL_D,                      KC_MINS,  P4_ALT,  P5_SFT,  P6_CTL, KC_COLN,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
