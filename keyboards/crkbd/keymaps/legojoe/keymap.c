@@ -26,7 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DELLINE C(S(KC_K))
 #define UNDO    C(KC_Z)
 #define REDO    C(KC_Y)
-// #define GRT_THN S(KC_DOT)
 #define CUT     C(KC_X)
 #define COPY    C(KC_C)
 #define PASTE   C(KC_V)
@@ -36,9 +35,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Windows shortcuts
 #define VDESK_L G(C(KC_LEFT))
 #define VDESK_R G(C(KC_RIGHT))
-// Layer-taps
-#define EQL_LOW LT(2, KC_EQL)
-#define TAB_RAI LT(3, KC_TAB)
 // Right-hand home row mods - lower layer
 #define P4_ALT LALT_T(KC_P4)
 #define P5_SFT RSFT_T(KC_P5)
@@ -46,11 +42,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 enum layers {
   _COLEMAK, // Colemak DH
-  _QWERTY,
   _LOWER,
   _RAISE,
-  _ADJUST,
-  _NAV
+  _ADJUST
 };
 
 enum custom_keycodes {
@@ -58,17 +52,16 @@ enum custom_keycodes {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_QWERTY] = LAYOUT_split_3x6_3(
+  [_COLEMAK] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
+       KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      OS_LSFT,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, UK_QUOT,
+      OS_LSFT,    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O, UK_QUOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
+      KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LALT,   MO(2),  KC_SPC,     KC_SPC,   MO(3), KC_LGUI
+                                          KC_LALT,   MO(1),  KC_SPC,     KC_SPC,   MO(2), KC_LGUI
                                       //`--------------------------'  `--------------------------'
-
   ),
 
   [_LOWER] = LAYOUT_split_3x6_3(
@@ -79,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______,    UNDO,     CUT,    COPY,   PASTE,    SAVE,                        KC_P0,   KC_P1,   KC_P2,   KC_P3,  KC_DOT, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______,   MO(4), _______
+                                          _______, _______, _______,    _______,   MO(3), _______
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -91,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______,    REDO, UK_TILD, UK_HASH, KC_ASTR, UK_BSLS,                      KC_SLSH, KC_LBRC, KC_RBRC, MTCHBRK, COMMENT, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______,   MO(4), _______,    _______, _______, _______
+                                          _______,   MO(3), _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -101,21 +94,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, RGB_HUI, RGB_SAI, RGB_VAI, VDESK_L, KC_PSCR,                      XXXXXXX, VDESK_R, XXXXXXX, XXXXXXX, XXXXXXX,  KC_F12,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX,   DF(0),                        DF(1), XXXXXXX, XXXXXXX, CTALTDL, KC_NLCK,RGB_RMOD,
+      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, CTALTDL, KC_NLCK,RGB_RMOD,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    _______, _______, _______
-                                      //`--------------------------'  `--------------------------'
-  ),
-
-  [_COLEMAK] = LAYOUT_split_3x6_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN, KC_BSPC,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      OS_LSFT,    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O, UK_QUOT,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LALT, EQL_LOW,  KC_SPC,     KC_SPC, TAB_RAI, KC_LGUI
                                       //`--------------------------'  `--------------------------'
   )
 };
@@ -183,41 +164,12 @@ void oled_render_layer_state(void) {
 }
 
 void oled_render_led_state(void) {
-  // static const char PROGMEM numlock_on[] = {
-  //   0x85, 0x86, 0x87, 0x88, 0x89,
-  //   0xa5, 0xa6, 0xa7, 0xa8, 0xa9,
-  //   0};
-  // static const char PROGMEM numlock_off[] = {
-  //   0x20, 0x20, 0x20, 0x20, 0x20,
-  //   0x20, 0x20, 0x20, 0x20, 0x20,
-  //   0};
-
   led_t led_state = host_keyboard_led_state();
 
   if (led_state.num_lock) {
     oled_write_P(PSTR(" num "), false);
   } else {
     oled_write_P(PSTR("     "), false);
-  }
-}
-
-void oled_render_layout_state(void) {
-  // static const char PROGMEM colemak[] = {
-  //   0x8a, 0x8b, 0x8c, 0x8d, 0x8e,
-  //   0xaa, 0xab, 0xac, 0xad, 0xae,
-  //   0};
-  // static const char PROGMEM qwerty[] = {
-  //   0x20, 0x20, 0x20, 0x20, 0x20,
-  //   0x20, 0x20, 0x20, 0x20, 0x20,
-  //   0};
-
-  switch (get_highest_layer(layer_state|default_layer_state)) {
-    case _COLEMAK:
-      oled_write_P(PSTR(" k:c "), false);
-      break;
-    case _QWERTY:
-      oled_write_P(PSTR(" k:q "), false);
-      break;
   }
 }
 
@@ -231,11 +183,11 @@ void oled_task_user(void) {
     oled_render_space();
     oled_render_mini_logo();
     oled_render_space();
+    oled_render_space();
     oled_render_layer_state();
     oled_render_space();
-    oled_render_led_state();
     oled_render_space();
-    oled_render_layout_state();
+    oled_render_led_state();
   } else {
     oled_render_logo();
     oled_scroll_left();
