@@ -225,8 +225,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-const uint16_t PROGMEM combo_desk_l[] = {KC_EQL, KC_D, COMBO_END};
-const uint16_t PROGMEM combo_desk_r[] = {KC_SPC, KC_H, COMBO_END};
+const uint16_t PROGMEM combo_desk_l[] = {KC_C, KC_D, COMBO_END};
+const uint16_t PROGMEM combo_desk_r[] = {KC_H, KC_COMM, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo_desk_l, VDESK_L),
     COMBO(combo_desk_r, VDESK_R)
