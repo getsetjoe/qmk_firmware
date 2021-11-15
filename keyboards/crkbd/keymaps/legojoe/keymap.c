@@ -35,7 +35,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Windows shortcuts
 #define VDESK_L G(C(KC_LEFT))
 #define VDESK_R G(C(KC_RIGHT))
-
+// Layer taps
+#define LT1_EQL LT(1, KC_EQL)
+#define LT2_SPC LT(2, KC_SPC)
 // Left-hand home row mods
 #define GUI_A LGUI_T(KC_A)
 #define CTL_R LCTL_T(KC_R)
@@ -65,13 +67,13 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT,   TO(0),
+       KC_ESC,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        TG(1),   GUI_A,   CTL_R,   SFT_S,  ALTH_T,    KC_G,                         KC_M,   ALT_N,   SFT_E,   CTL_I,   GUI_O,   TG(2),
+      XXXXXXX,   GUI_A,   CTL_R,   SFT_S,  ALTH_T,    KC_G,                         KC_M,   ALT_N,   SFT_E,   CTL_I,   GUI_O, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           KC_TAB,  KC_EQL, KC_MINS,    KC_ENT,  KC_SPC, KC_BSPC
+                                           KC_TAB, LT1_EQL, KC_MINS,    KC_ENT,  LT2_SPC, KC_BSPC
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -81,9 +83,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_PGDN, KC_LEFT, KC_DOWN,KC_RIGHT,  CTRL_D,                      KC_MINS,   ALT_4,   SFT_5,   CTL_6, KC_COLN, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,    UNDO,     CUT,    COPY,   PASTE,    REDO,                      MTCHBRK,    KC_1,    KC_2,    KC_3,  KC_DOT, DELLINE,
+      _______,    UNDO,     CUT,    COPY,   PASTE,    REDO,                         KC_0,    KC_1,    KC_2,    KC_3,  KC_DOT, DELLINE,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______,    KC_0, _______
+                                          _______, _______, _______,    _______,   MO(3), _______
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -95,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, XXXXXXX, KC_TILD, KC_HASH, KC_ASTR, KC_BSLS,                      KC_SLSH, KC_LBRC, KC_RBRC,   KC_LT,   KC_GT, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______, _______, _______
+                                          _______,   MO(3), _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
