@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_ESC,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LGUI,    KC_A,   CTL_R,   SFT_S,    AL_T,    KC_G,                         KC_M,   ALT_N,   SFT_E,   CTL_I,    KC_O, XXXXXXX,
+      XXXXXXX,    KC_A,   CTL_R,   SFT_S,    AL_T,    KC_G,                         KC_M,   ALT_N,   SFT_E,   CTL_I,    KC_O, KC_LGUI,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -225,9 +225,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-const uint16_t PROGMEM combo_desk_l[] = {KC_C, KC_D, COMBO_END};
-const uint16_t PROGMEM combo_desk_r[] = {KC_H, KC_COMM, COMBO_END};
+const uint16_t PROGMEM combo_c_d[] = {KC_C, KC_D, COMBO_END};
+const uint16_t PROGMEM combo_h_com[] = {KC_H, KC_COMM, COMBO_END};
+const uint16_t PROGMEM combo_f_p[] = {KC_F, KC_P, COMBO_END};
+const uint16_t PROGMEM combo_w_p[] = {KC_W, KC_P, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(combo_desk_l, VDESK_L),
-    COMBO(combo_desk_r, VDESK_R)
+    COMBO(combo_c_d, VDESK_L),
+    COMBO(combo_h_com, VDESK_R),
+    COMBO(combo_f_p, C(KC_P)),
+    COMBO(combo_w_p, S(C(KC_P)))
 };
