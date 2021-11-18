@@ -20,7 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #include "keymap_uk.h"
 
 #define CTALTDL LCA(KC_DEL)
-#define OS_LSFT OSM(MOD_LSFT)
 // VS Code shortcuts
 #define CTRL_D  C(KC_D)
 #define DELLINE C(S(KC_K))
@@ -29,8 +28,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define CUT     C(KC_X)
 #define COPY    C(KC_C)
 #define PASTE   C(KC_V)
-#define COMMENT C(KC_SLSH)
-#define SAVE    C(KC_S) 
 #define MTCHBRK C(S(KC_BSLS))
 // Windows shortcuts
 #define VDESK_L G(C(KC_LEFT))
@@ -83,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, KC_PGUP, KC_HOME,   KC_UP,  KC_END,    SAVE,                      KC_PLUS,    KC_7,    KC_8,    KC_9, KC_PERC, DELLINE,
+      _______, KC_PGUP, KC_HOME,   KC_UP,  KC_END, MTCHBRK,                      KC_PLUS,    KC_7,    KC_8,    KC_9, KC_PERC, DELLINE,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_PGDN, KC_LEFT, KC_DOWN,KC_RIGHT,  CTRL_D,                      KC_MINS,   ALT_4,   SFT_5,   CTL_6, KC_COLN, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -109,9 +106,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       RGB_TOG,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, RGB_HUI, RGB_SAI, RGB_VAI, VDESK_L, KC_PSCR,                      XXXXXXX, VDESK_R, XXXXXXX, XXXXXXX, XXXXXXX,  KC_F12,
+      _______, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, KC_PSCR,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_F12,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD,   WIN_L, XXXXXXX,                      XXXXXXX,   WIN_R, XXXXXXX, CTALTDL, XXXXXXX,RGB_RMOD,
+      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, CTALTDL, XXXXXXX,RGB_RMOD,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
@@ -225,13 +222,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-const uint16_t PROGMEM combo_c_d[] = {KC_C, KC_D, COMBO_END};
-const uint16_t PROGMEM combo_h_com[] = {KC_H, KC_COMM, COMBO_END};
+const uint16_t PROGMEM combo_s_t[] = {SFT_S, AL_T, COMBO_END};
+const uint16_t PROGMEM combo_n_e[] = {ALT_N, SFT_E, COMBO_END};
 const uint16_t PROGMEM combo_f_p[] = {KC_F, KC_P, COMBO_END};
 const uint16_t PROGMEM combo_w_p[] = {KC_W, KC_P, COMBO_END};
+const uint16_t PROGMEM combo_l_u[] = {KC_L, KC_U, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(combo_c_d, VDESK_L),
-    COMBO(combo_h_com, VDESK_R),
+    COMBO(combo_s_t, VDESK_L),
+    COMBO(combo_n_e, VDESK_R),
     COMBO(combo_f_p, C(KC_P)),
-    COMBO(combo_w_p, S(C(KC_P)))
+    COMBO(combo_w_p, S(C(KC_P))),
+    COMBO(combo_l_u, C(KC_R))
 };

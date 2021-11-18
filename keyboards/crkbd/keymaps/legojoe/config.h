@@ -37,9 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT
 
-#define ONESHOT_TIMEOUT 1000  /* Time (in ms) before the one shot key is released */
-
-#define COMBO_COUNT 4
+#define COMBO_COUNT 5
 
 #ifdef RGBLIGHT_ENABLE
     #undef RGBLED_NUM
