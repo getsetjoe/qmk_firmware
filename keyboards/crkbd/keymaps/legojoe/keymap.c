@@ -220,14 +220,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-const uint16_t PROGMEM combo_s_t[] = {SFT_S, AL_T, COMBO_END};
-const uint16_t PROGMEM combo_n_e[] = {ALT_N, SFT_E, COMBO_END};
+const uint16_t PROGMEM combo_c_d[] = {KC_C, KC_D, COMBO_END};
+const uint16_t PROGMEM combo_h_com[] = {KC_H, KC_COMM, COMBO_END};
 const uint16_t PROGMEM combo_f_p[] = {KC_F, KC_P, COMBO_END};
 const uint16_t PROGMEM combo_w_p[] = {KC_W, KC_P, COMBO_END};
 const uint16_t PROGMEM combo_l_u[] = {KC_L, KC_U, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(combo_s_t, VDESK_L),
-    COMBO(combo_n_e, VDESK_R),
+    COMBO(combo_c_d, VDESK_L),
+    COMBO(combo_h_com, VDESK_R),
     COMBO(combo_f_p, C(KC_P)),
     COMBO(combo_w_p, S(C(KC_P))),
     COMBO(combo_l_u, C(KC_R))
