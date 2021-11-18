@@ -36,7 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define WIN_R S(A(KC_TAB))
 // Layer taps
 #define LT1_EQL LT(1, KC_EQL)
-#define LT2_MIN LT(2, KC_MINS)
+#define LT2_SPC LT(2, KC_SPC)
 // Left-hand home row mods
 #define GUI_A LGUI_T(KC_A)
 #define CTL_R LCTL_T(KC_R)
@@ -51,6 +51,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define ALT_4 LALT_T(KC_4)
 #define SFT_5 RSFT_T(KC_5)
 #define CTL_6 LCTL_T(KC_6)
+// Mod taps
+#define SFT_ENT SFT_T(KC_ENT)
 
 enum layers {
   _COLEMAK, // Colemak DH
@@ -72,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           KC_TAB, LT1_EQL, KC_SPC,      KC_SPC, LT2_MIN, KC_BSPC
+                                           KC_TAB, LT1_EQL, SFT_ENT,    KC_MINS,  LT2_SPC, KC_BSPC
                                       //`--------------------------'  `--------------------------'
   ),
 
