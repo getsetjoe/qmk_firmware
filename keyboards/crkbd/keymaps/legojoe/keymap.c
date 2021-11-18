@@ -51,8 +51,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define ALT_4 LALT_T(KC_4)
 #define SFT_5 RSFT_T(KC_5)
 #define CTL_6 LCTL_T(KC_6)
-// Mod taps
-#define SFT_ENT SFT_T(KC_ENT)
 
 enum layers {
   _COLEMAK, // Colemak DH
@@ -74,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           KC_TAB, LT1_EQL, SFT_ENT,    KC_MINS,  LT2_SPC, KC_BSPC
+                                           KC_TAB, LT1_EQL,  KC_ENT,    KC_MINS,  LT2_SPC, KC_BSPC
                                       //`--------------------------'  `--------------------------'
   ),
 
