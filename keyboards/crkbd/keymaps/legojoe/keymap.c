@@ -35,18 +35,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define WIN_L A(KC_TAB)
 #define WIN_R S(A(KC_TAB))
 // Layer taps
-#define LT1_EQL LT(1, KC_EQL)
+#define LT1_SPC LT(1, KC_SPC)
 #define LT2_SPC LT(2, KC_SPC)
 // Left-hand home row mods
-#define GUI_A LGUI_T(KC_A)
-#define CTL_R LCTL_T(KC_R)
-#define SFT_S LSFT_T(KC_S)
-#define AL_T LALT_T(KC_T)
-// Right-hand home row mods
-#define ALT_N LALT_T(KC_N)
-#define SFT_E RSFT_T(KC_E)
-#define CTL_I RCTL_T(KC_I)
-#define GUI_O RGUI_T(KC_O)
+// #define GUI_A LGUI_T(KC_A)
+// #define CTL_R LCTL_T(KC_R)
+// #define SFT_S LSFT_T(KC_S)
+// #define AL_T LALT_T(KC_T)
+// // Right-hand home row mods
+// #define ALT_N LALT_T(KC_N)
+// #define SFT_E RSFT_T(KC_E)
+// #define CTL_I RCTL_T(KC_I)
+// #define GUI_O RGUI_T(KC_O)
 // Right-hand home row mods - lower layer
 #define ALT_4 LALT_T(KC_4)
 #define SFT_5 RSFT_T(KC_5)
@@ -66,19 +66,19 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT,  KC_DEL,
+       KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,    KC_A,   CTL_R,   SFT_S,    AL_T,    KC_G,                         KC_M,   ALT_N,   SFT_E,   CTL_I,    KC_O, KC_LGUI,
+      KC_LSFT,    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O, KC_LSFT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
+      KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           KC_TAB, LT1_EQL,  KC_ENT,    KC_MINS,  LT2_SPC, KC_BSPC
+                                          KC_LALT, LT1_SPC,  KC_ENT,    KC_BSPC, LT2_SPC, KC_LGUI
                                       //`--------------------------'  `--------------------------'
   ),
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, KC_PGUP, KC_HOME,   KC_UP,  KC_END, MTCHBRK,                      KC_PLUS,    KC_7,    KC_8,    KC_9, KC_PERC, DELLINE,
+       KC_ESC, KC_PGUP, KC_HOME,   KC_UP,  KC_END, MTCHBRK,                      KC_PLUS,    KC_7,    KC_8,    KC_9, KC_PERC, DELLINE,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_PGDN, KC_LEFT, KC_DOWN,KC_RIGHT,  CTRL_D,                      KC_MINS,   ALT_4,   SFT_5,   CTL_6, KC_COLN, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -225,10 +225,13 @@ const uint16_t PROGMEM combo_h_com[] = {KC_H, KC_COMM, COMBO_END};
 const uint16_t PROGMEM combo_f_p[] = {KC_F, KC_P, COMBO_END};
 const uint16_t PROGMEM combo_w_p[] = {KC_W, KC_P, COMBO_END};
 const uint16_t PROGMEM combo_l_u[] = {KC_L, KC_U, COMBO_END};
+const uint16_t PROGMEM combo_r_s[] = {KC_R, KC_S, COMBO_END};
+
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo_c_d, VDESK_L),
     COMBO(combo_h_com, VDESK_R),
     COMBO(combo_f_p, C(KC_P)),
     COMBO(combo_w_p, S(C(KC_P))),
-    COMBO(combo_l_u, C(KC_R))
-};
+    COMBO(combo_l_u, C(KC_R)),
+    COMBO(combo_r_s, C(KC_S))
+}; 
