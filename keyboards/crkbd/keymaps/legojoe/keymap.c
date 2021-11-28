@@ -37,6 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Layer taps
 #define LT1_SPC LT(1, KC_SPC)
 #define LT2_SPC LT(2, KC_SPC)
+#define LT3_ENT LT(3, KC_ENT) 
 // Left-hand home row mods
 // #define GUI_A LGUI_T(KC_A)
 // #define CTL_R LCTL_T(KC_R)
@@ -51,6 +52,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define ALT_4 LALT_T(KC_4)
 #define SFT_5 RSFT_T(KC_5)
 #define CTL_6 LCTL_T(KC_6)
+// Mod taps
+#define AL_TB LALT_T(KC_TAB)
 
 enum layers {
   _COLEMAK, // Colemak DH
@@ -70,9 +73,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O, KC_LSFT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
+      KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, LT3_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LALT, LT1_SPC,  KC_ENT,    KC_BSPC, LT2_SPC, KC_LGUI
+                                            AL_TB, LT1_SPC,  KC_ENT,    KC_BSPC, LT2_SPC, KC_LGUI
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -84,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______,    UNDO,     CUT,    COPY,   PASTE,    REDO,                         KC_0,    KC_1,    KC_2,    KC_3,  KC_DOT, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______,   MO(3), _______
+                                          _______, _______, _______,    _______,    KC_0, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -96,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, XXXXXXX, KC_TILD, KC_HASH, KC_ASTR, KC_BSLS,                      KC_SLSH, KC_LBRC, KC_RBRC,   KC_LT,   KC_GT, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______,   MO(3), _______,    _______, _______, _______
+                                          _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -106,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, KC_PSCR,                      XXXXXXX,   KC_F4,   KC_F5,   KC_F6,  KC_F11, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX,   KC_F1,   KC_F2,   KC_F3,  KC_F12,RGB_RMOD,
+      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX,   KC_F1,   KC_F2,   KC_F3,  KC_F12, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
@@ -223,7 +226,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM combo_c_d[] = {KC_C, KC_D, COMBO_END};
 const uint16_t PROGMEM combo_h_com[] = {KC_H, KC_COMM, COMBO_END};
 const uint16_t PROGMEM combo_f_p[] = {KC_F, KC_P, COMBO_END};
-const uint16_t PROGMEM combo_w_p[] = {KC_W, KC_P, COMBO_END};
+const uint16_t PROGMEM combo_w_f[] = {KC_W, KC_F, COMBO_END};
 const uint16_t PROGMEM combo_l_u[] = {KC_L, KC_U, COMBO_END};
 const uint16_t PROGMEM combo_r_s[] = {KC_R, KC_S, COMBO_END};
 
@@ -231,7 +234,7 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo_c_d, VDESK_L),
     COMBO(combo_h_com, VDESK_R),
     COMBO(combo_f_p, C(KC_P)),
-    COMBO(combo_w_p, S(C(KC_P))),
+    COMBO(combo_w_f, S(C(KC_P))),
     COMBO(combo_l_u, C(KC_R)),
     COMBO(combo_r_s, C(KC_S))
 }; 
