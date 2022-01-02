@@ -28,8 +28,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define CTL_RGT C(KC_RIGHT)
 #define ALT_UP  A(KC_UP)
 #define ALT_DWN A(KC_DOWN)
-#define INDENT  C(KC_LBRC)
-#define OUTDENT C(KC_RBRC)
+#define INDENT  C(KC_RBRC)
+#define OUTDENT C(KC_LBRC)
 #define PG_TOP  C(KC_HOME)
 #define PG_END  C(KC_END)
 #define DELLINE C(S(KC_K))
@@ -193,7 +193,7 @@ void oled_render_space(void) {
   oled_write_P(PSTR("     "), false);
 }
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
   if (is_keyboard_master()) {
     oled_render_space();
     oled_render_space();
@@ -208,6 +208,8 @@ void oled_task_user(void) {
     oled_render_logo();
     oled_scroll_left();
   }
+
+  return false;
 }
 
 #endif // OLED_ENABLE
