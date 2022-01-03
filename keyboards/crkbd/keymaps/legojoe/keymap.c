@@ -94,9 +94,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, XXXXXXX,   KC_AT, XXXXXXX,  KC_DLR, KC_CIRC,                      KC_AMPR, KC_LCBR, KC_RCBR, XXXXXXX,  KC_GRV, _______,
+      _______, XXXXXXX,   KC_AT, KC_CIRC,  KC_DLR, XXXXXXX,                      KC_AMPR, KC_LCBR, KC_RCBR, XXXXXXX,  KC_GRV, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_EXLM,   KC_LT,   KC_GT,  KC_EQL, XXXXXXX,                      KC_PIPE, KC_LPRN, KC_RPRN,   ARROW, KC_SCLN, _______,
+      _______, KC_EXLM,   KC_LT,  KC_EQL,   KC_GT, XXXXXXX,                      KC_PIPE, KC_LPRN, KC_RPRN,   ARROW, KC_SCLN, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_TILD, KC_LBRC, KC_RBRC, XXXXXXX, KC_ASTR, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -242,8 +242,16 @@ const uint16_t PROGMEM combo_r_s[] = {KC_R, KC_S, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo_c_d, VDESK_L),
     COMBO(combo_h_com, VDESK_R),
-    COMBO(combo_f_p, C(KC_P)),    // goto file
-    COMBO(combo_w_f, S(C(KC_P))), // command palette
-    COMBO(combo_l_u, C(KC_R)),    // recent projects
+    COMBO(combo_f_p, C(KC_PGUP)), // prev tab
+    COMBO(combo_l_u, C(KC_PGDN)), // next tab
+    COMBO(combo_w_f, C(KC_P)),    // command palette
     COMBO(combo_r_s, C(KC_S))     // save
-}; 
+};
+
+
+const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
+// This globally defines all key overrides to be used
+const key_override_t **key_overrides = (const key_override_t *[]){
+    &delete_key_override,
+    NULL // Null terminate the array of overrides!
+};
