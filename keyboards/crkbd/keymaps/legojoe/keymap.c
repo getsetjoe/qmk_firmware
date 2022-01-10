@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define CTALTDL LCA(KC_DEL)
 #define DELWORD C(KC_BSPC)
-#define CTL_TAB C(KC_TAB)
+#define ALT_TAB A(KC_TAB)
 // VS Code shortcuts
 #define CTRL_D  C(KC_D)
 #define CTL_LFT C(KC_LEFT)
@@ -82,11 +82,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, KC_PGUP, KC_HOME,   KC_UP,  KC_END, DELLINE,                      KC_PLUS,    KC_7,    KC_8,    KC_9, XXXXXXX, _______,
+      _______, KC_PGUP, KC_HOME,   KC_UP,  KC_END, DELLINE,                      KC_PLUS,    KC_7,    KC_8,    KC_9, KC_PERC, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_PGDN, KC_LEFT, KC_DOWN,KC_RIGHT,  KC_TAB,                      KC_MINS,    KC_4,    KC_5,    KC_6, KC_COLN, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,    UNDO,     CUT,    COPY,   PASTE,  CTRL_D,                      KC_HASH,    KC_1,    KC_2,    KC_3, KC_PERC, _______,
+      _______,    UNDO,     CUT,    COPY,   PASTE,  CTRL_D,                      KC_HASH,    KC_1,    KC_2,    KC_3,  KC_DOT, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    DELWORD, _______,    KC_0
                                       //`--------------------------'  `--------------------------'
@@ -108,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       RGB_TOG,  PG_TOP, OUTDENT,  ALT_UP,  INDENT, XXXXXXX,                      XXXXXXX,   KC_F7,   KC_F8,   KC_F9,  KC_F11, CTALTDL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,  PG_END, CTL_LFT, ALT_DWN, CTL_RGT, CTL_TAB,                      KC_UNDS,   KC_F4,   KC_F5,   KC_F6,  KC_F12, _______,
+      _______,  PG_END, CTL_LFT, ALT_DWN, CTL_RGT, ALT_TAB,                      KC_UNDS,   KC_F4,   KC_F5,   KC_F6,  KC_F12, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______,    REDO, XXXXXXX, KC_PSCR, XXXXXXX, XXXXXXX,                      XXXXXXX,   KC_F1,   KC_F2,   KC_F3, KC_BSLS, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
