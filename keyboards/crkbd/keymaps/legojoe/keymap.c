@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DELWORD C(KC_BSPC)
 #define ALT_TAB A(KC_TAB)
 // VS Code shortcuts
+#define CTRL_A  C(KC_A)
 #define CTRL_D  C(KC_D)
 #define CTL_LFT C(KC_LEFT)
 #define CTL_RGT C(KC_RIGHT)
@@ -83,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_PGDN, KC_LEFT, KC_DOWN,KC_RIGHT,  KC_TAB,                      KC_MINS,    KC_4,    KC_5,    KC_6, KC_COLN, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,    UNDO,     CUT,    COPY,   PASTE,  CTRL_D,                      KC_HASH,    KC_1,    KC_2,    KC_3,  KC_DOT, _______,
+      _______,    UNDO,     CUT,    COPY,   PASTE,  CTRL_A,                      KC_HASH,    KC_1,    KC_2,    KC_3,  KC_DOT, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    _______, _______,    KC_0
                                       //`--------------------------'  `--------------------------'
@@ -95,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_EXLM,   KC_LT,  KC_EQL,   KC_GT, ALT_TAB,                      KC_PIPE, KC_LPRN, KC_RPRN,   ARROW, KC_SCLN, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_TILD, KC_LBRC, KC_RBRC, XXXXXXX, KC_ASTR, _______,
+      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  CTRL_D,                      KC_TILD, KC_LBRC, KC_RBRC, XXXXXXX, KC_ASTR, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
