@@ -37,7 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT
 
-#define COMBO_COUNT 7
+#define COMBO_COUNT 6
 
 #ifdef RGBLIGHT_ENABLE
     #undef RGBLED_NUM

@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, XXXXXXX,   KC_AT, KC_CIRC,  KC_DLR, XXXXXXX,                      KC_AMPR, KC_LCBR, KC_RCBR, XXXXXXX,  KC_GRV, KC_DEL,
+      _______, XXXXXXX,   KC_AT, KC_CIRC,  KC_DLR, XXXXXXX,                      KC_AMPR, KC_LCBR, KC_RCBR, C(KC_P),  KC_GRV, KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_EXLM,   KC_LT,  KC_EQL,   KC_GT, ALT_TAB,                      KC_PIPE, KC_LPRN, KC_RPRN,   ARROW, KC_SCLN, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -232,7 +232,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 const uint16_t PROGMEM combo_c_d[] = {KC_C, KC_D, COMBO_END};
 const uint16_t PROGMEM combo_h_com[] = {KC_H, KC_COMM, COMBO_END};
 const uint16_t PROGMEM combo_f_p[] = {KC_F, KC_P, COMBO_END};
-const uint16_t PROGMEM combo_w_f[] = {KC_W, KC_F, COMBO_END};
 const uint16_t PROGMEM combo_l_u[] = {KC_L, KC_U, COMBO_END};
 const uint16_t PROGMEM combo_r_s[] = {KC_R, KC_S, COMBO_END};
 const uint16_t PROGMEM combo_shifts[] = {KC_LSFT, KC_RSFT, COMBO_END};
@@ -242,7 +241,6 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo_h_com, VDESK_R),
     COMBO(combo_f_p, C(KC_PGUP)), // prev tab
     COMBO(combo_l_u, C(KC_PGDN)), // next tab
-    COMBO(combo_w_f, C(KC_P)),    // command palette
     COMBO(combo_r_s, C(KC_S)),    // save
     COMBO(combo_shifts, C(KC_CAPS))
 };
