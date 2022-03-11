@@ -180,8 +180,8 @@ void oled_render_layer_state(void) {
 void oled_render_led_state(void) {
   led_t led_state = host_keyboard_led_state();
 
-  if (led_state.num_lock) {
-    oled_write_P(PSTR(" num "), false);
+  if (led_state.caps_lock) {
+    oled_write_P(PSTR(" CAPS"), false);
   } else {
     oled_write_P(PSTR("     "), false);
   }
