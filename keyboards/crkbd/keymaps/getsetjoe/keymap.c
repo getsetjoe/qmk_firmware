@@ -80,11 +80,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, KC_PGUP, KC_HOME,   KC_UP,  KC_END, DELLINE,                      KC_PLUS,    KC_7,    KC_8,    KC_9,    KC_0, _______,
+      _______, KC_PGUP, KC_HOME,   KC_UP,  KC_END, DELLINE,                      KC_PLUS,    KC_7,    KC_8,    KC_9, KC_PERC, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_PGDN, KC_LEFT, KC_DOWN,KC_RIGHT,  KC_TAB,                      KC_MINS,    KC_4,    KC_5,    KC_6, KC_COLN, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,    UNDO,     CUT,    COPY,   PASTE,  CTRL_D,                      KC_PERC,    KC_1,    KC_2,    KC_3,  KC_DOT, _______,
+      _______,    UNDO,     CUT,    COPY,   PASTE,  CTRL_D,                       KC_DOT,    KC_1,    KC_2,    KC_3,    KC_0, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_EXLM,   KC_LT,  KC_EQL,   KC_GT, ALT_TAB,                      KC_PIPE, KC_LPRN, KC_RPRN,   ARROW, KC_SCLN, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  CTRL_A,                      KC_HASH, KC_LBRC, KC_RBRC, XXXXXXX, KC_ASTR, _______,
+      _______, XXXXXXX, XXXXXXX, KC_COMM, KC_COLN,  CTRL_A,                      KC_HASH, KC_LBRC, KC_RBRC, XXXXXXX, KC_ASTR, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
@@ -230,18 +230,18 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 
 
-const uint16_t PROGMEM combo_c_d[] = {KC_C, KC_D, COMBO_END};
-const uint16_t PROGMEM combo_h_com[] = {KC_H, KC_COMM, COMBO_END};
-const uint16_t PROGMEM combo_f_p[] = {KC_F, KC_P, COMBO_END};
-const uint16_t PROGMEM combo_l_u[] = {KC_L, KC_U, COMBO_END};
-const uint16_t PROGMEM combo_r_s[] = {KC_R, KC_S, COMBO_END};
-const uint16_t PROGMEM combo_shifts[] = {KC_LSFT, KC_RSFT, COMBO_END};
+const uint16_t PROGMEM combo_vdesk_l[] = {KC_COMM, KC_COLN, COMBO_END};
+const uint16_t PROGMEM combo_vdesk_r[] = {KC_LBRC, KC_RBRC, COMBO_END};
+const uint16_t PROGMEM combo_tab_prev[] = {KC_CIRC, KC_DLR, COMBO_END};
+const uint16_t PROGMEM combo_tab_next[] = {KC_LCBR, KC_RCBR, COMBO_END};
+const uint16_t PROGMEM combo_save[] = {KC_LT, KC_EQL, COMBO_END};
+const uint16_t PROGMEM combo_caps[] = {KC_LSFT, KC_RSFT, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(combo_c_d, VDESK_L),
-    COMBO(combo_h_com, VDESK_R),
-    COMBO(combo_f_p, C(KC_PGUP)), // prev tab
-    COMBO(combo_l_u, C(KC_PGDN)), // next tab
-    COMBO(combo_r_s, C(KC_S)),    // save
-    COMBO(combo_shifts, C(KC_CAPS))
+    COMBO(combo_vdesk_l, VDESK_L),
+    COMBO(combo_vdesk_r, VDESK_R),
+    COMBO(combo_tab_prev, C(KC_PGUP)),
+    COMBO(combo_tab_next, C(KC_PGDN)),
+    COMBO(combo_save, C(KC_S)),
+    COMBO(combo_caps, KC_CAPS)
 };
