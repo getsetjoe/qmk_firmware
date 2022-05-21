@@ -47,12 +47,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define VDESK_R G(C(KC_RIGHT))
 #define WIN_L A(KC_TAB)
 #define WIN_R S(A(KC_TAB))
-// Mod taps
-// #define TAB_ALT LALT_T(KC_TAB)
-// Right-hand home row mods - lower layer
-// #define ALT_4 LALT_T(KC_4)
-// #define SFT_5 RSFT_T(KC_5)
-// #define CTL_6 LCTL_T(KC_6)
+// One-shots
+#define OSM_SFT OSM(MOD_LSFT)
+#define OSM_CTL OSM(MOD_LCTL)
+#define OSM_ALT OSM(MOD_LALT)
 
 enum layers {
   _COLEMAK, // Colemak DH
@@ -70,11 +68,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_ESC,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O, KC_RSFT,
+      OSM_SFT,    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
+      OSM_CTL,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LALT,   MO(1),  KC_SPC,     KC_SPC,   MO(2), KC_LGUI
+                                          OSM_ALT,   MO(1),  KC_SPC,     KC_SPC,   MO(2), KC_LGUI
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -235,7 +233,7 @@ const uint16_t PROGMEM combo_vdesk_r[] = {KC_LBRC, KC_RBRC, COMBO_END};
 const uint16_t PROGMEM combo_tab_prev[] = {KC_CIRC, KC_DLR, COMBO_END};
 const uint16_t PROGMEM combo_tab_next[] = {KC_LCBR, KC_RCBR, COMBO_END};
 const uint16_t PROGMEM combo_save[] = {KC_LT, KC_EQL, COMBO_END};
-const uint16_t PROGMEM combo_caps[] = {KC_LSFT, KC_RSFT, COMBO_END};
+const uint16_t PROGMEM combo_caps[] = {OSM_SFT, KC_RSFT, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo_vdesk_l, VDESK_L),
