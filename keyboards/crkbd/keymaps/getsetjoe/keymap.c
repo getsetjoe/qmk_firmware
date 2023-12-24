@@ -48,7 +48,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define WIN_L A(KC_TAB)
 #define WIN_R S(A(KC_TAB))
 // Mod-taps
-#define RSH_SCL RSFT_T(KC_SCLN)
+#define RSH_SCL RSFT_T(KC_SCLN) // right-shift on hold, semicolon on tap
 
 enum layers {
   _COLEMAK, // Colemak DH
